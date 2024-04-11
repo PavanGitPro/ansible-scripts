@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - ec2_group:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        region: "us-east-1"
+        state: "present"
+        name: "spk-sg"
+        description: "allow"
+        tags:
+          Name: "sp-sg"
+        rules:
+          - proto: "all"
+            cidr_ip: "0.0.0.0/0"
+            rule_desc: "allow all traffic"
+      register: security_group_results
