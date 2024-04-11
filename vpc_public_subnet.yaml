@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - ec2_vpc_subnet:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        region: "us-east-1"
+        az: "us-east-1a"  # az is the availability zone
+        state: "present"
+        cidr: "10.0.0.0/20"
+        # enable public ip
+        map_public: yes
+        resource_tags:
+          Name: "spk-pub"
+      register: pubsubnet_result
