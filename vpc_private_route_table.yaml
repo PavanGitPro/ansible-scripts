@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - ec2_vpc_route_table:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        region: "us-east-1"
+        state: "present"
+        tags:
+          Name: "spk-pvt-rt"
+        subnets: ["{{ pvtsubnet_result.subnet.id }}"]
+      register: private_route_table
