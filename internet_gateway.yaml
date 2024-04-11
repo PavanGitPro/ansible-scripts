@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:    
+    - ec2_vpc_igw:
+        aws_access_key: enter ur key 
+        aws_secret_key: enter ur key
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        region: "us-east-1"
+        state: "present"
+        tags:
+          Name: "spk-igw"
+      register: igw_result
