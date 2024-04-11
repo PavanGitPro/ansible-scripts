@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - ec2_vpc_net:
+        aws_access_key: enter your key
+        aws_secret_key: eneter your key
+        cidr_block: 10.0.0.0/16
+        name: pavan-vpc
+        region: us-east-1
+        state: present  # to delete VPC then replace 'present' with 'absent'
+      register: vpc_result
