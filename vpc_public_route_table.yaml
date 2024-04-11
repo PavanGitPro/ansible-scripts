@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - ec2_vpc_route_table:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        vpc_id: "{{ vpc_result.vpc.id }}"
+        region: "us-east-1"
+        state: "present"
+        tags:
+          Name: "spk-pub-rt"
+        subnets: ["{{ pubsubnet_result.subnet.id }}"]
+        # create routes
+        routes:
+          - dest: "0.0.0.0/0"
+            gateway_id: "{{ igw_result.gateway_id }}"
+      register: public_route_table
