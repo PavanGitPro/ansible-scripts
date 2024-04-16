@@ -1,0 +1,16 @@
+  - name: Create Load Balancer
+      ec2_elb_lb:
+        aws_access_key: ""
+        aws_secret_key: ""
+        region: "us-east-1"
+        name: "pavan-lb"
+        state: present
+        listeners:
+          - protocol: HTTP
+            load_balancer_port: 80
+            instance_protocol: HTTP
+            instance_port: 80
+        security_group_ids: "{{ security_group_results.group_id }}"
+        subnets:
+          - "{{ pubsubnet_result.subnet.id }}"
+
