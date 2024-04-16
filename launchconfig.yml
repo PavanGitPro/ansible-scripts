@@ -1,0 +1,11 @@
+  - name: Create Launch Configuration
+      ec2_lc:
+        aws_access_key: ""
+        aws_secret_key: ""
+        region: "us-east-1"
+        name: "pavan-lc"
+        image_id: "ami-0a699202e5027c10d"
+        instance_type: "t2.micro"
+        key_name: "ansible"
+        security_groups: ["pavan-sg"]
+        state: present
