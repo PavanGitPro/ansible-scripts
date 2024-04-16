@@ -1,0 +1,13 @@
+  - name: Create Auto Scaling Group
+      ec2_asg:
+        aws_access_key: ""
+        aws_secret_key: ""
+        region: "us-east-1"
+        name: "pavan-asg"
+        launch_config_name: "pavan-lc"
+        min_size: 1
+        max_size: 3
+        desired_capacity: 2
+        vpc_zone_identifier: "{{ pubsubnet_result.subnet.id }}"
+        load_balancers:
+          - "pavan-lb"
